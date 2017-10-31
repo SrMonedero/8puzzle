@@ -152,6 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13280b81ddbe46e1aa5709d16f639c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  piece: {fileID: 1699309698474648, guid: f7b8f77b41cca4821804c1a59ef09fde, type: 2}
+  positions:
+  - {x: -3.125, y: 3.125}
+  - {x: 0, y: 3.125}
+  - {x: 3.125, y: 3.125}
+  - {x: -3.125, y: 0}
+  - {x: 0, y: 0}
+  - {x: 3.125, y: 0}
+  - {x: -3.125, y: -3.125}
+  - {x: 0, y: -3.125}
+  - {x: 3.125, y: -3.125}
 --- !u!1 &433813492
 GameObject:
   m_ObjectHideFlags: 0
