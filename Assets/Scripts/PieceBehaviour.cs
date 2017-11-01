@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PieceBehaviour : MonoBehaviour {
 	public int position;
+	public int goodPosition;
 	public PuzzleControllerBehaviour puzzleController;
 
 	void OnMouseDown() {

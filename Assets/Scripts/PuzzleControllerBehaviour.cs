@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzleControllerBehaviour : MonoBehaviour {
+	private PuzzleState puzzleState;
 	private readonly int numOfPieces = 8;
 	public GameObject piece;
 	public Vector2[] positions;
@@ -24,6 +25,7 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	};
 
 	void Start() {
+		puzzleState = PuzzleState.UNSOLVED;
 		freePosition = 8;
 		Shuffle();
 		while (!IsSolvable()) {
@@ -36,23 +38,42 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 			newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
 			PieceBehaviour pieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
 			pieceBehaviour.position = initialPositions[i];
+			pieceBehaviour.goodPosition = i;
 			pieceBehaviour.puzzleController = this;
 		}
 		freePosition = initialPositions[numOfPieces];
 	}
 
     public void Move(GameObject piece) {
+		if (PuzzleState.SOLVED.Equals(puzzleState)) {
+			return;
+		}
 		int position = piece.GetComponent<PieceBehaviour>().position;
-
 		int[] possibleNextPositions = nextPositions[position];
 		if (Array.Exists(possibleNextPositions, element => element == freePosition)) {
 			piece.transform.position = positions[freePosition];
 			piece.GetComponent<PieceBehaviour>().position = freePosition;
 			freePosition = position;
+			if (IsSolved()) {
+				puzzleState = PuzzleState.SOLVED;
+			}
 		}
 	}
 
-	private void Shuffle()
+    private bool IsSolved() {
+		bool result = true;
+		GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece");
+		foreach (GameObject piece in pieces) {
+			PieceBehaviour pieceBehaviour = piece.GetComponent<PieceBehaviour>();
+			if (pieceBehaviour.position != pieceBehaviour.goodPosition) {
+				result = false;
+				break;
+			}
+		}
+        return result;
+    }
+
+    private void Shuffle()
     {
 		for (int i = 0; i < initialPositions.Length; i++) {
 			int randomPosition = UnityEngine.Random.Range(0, initialPositions.Length);
@@ -67,7 +88,7 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 		int inversions = 0;
 		for (int i = 0; i < initialPositions.Length; i++) {
 			for (int j = i+1; j < initialPositions.Length; j++) {
-				if (initialPositions[i] > initialPositions[j]) {
+				if (initialPositions[i] != 8 && initialPositions[j] != 8 && initialPositions[i] > initialPositions[j]) {
 					inversions++;
 				}
 			}
