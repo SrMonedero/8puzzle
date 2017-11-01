@@ -25,8 +25,10 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 		occupiedState = new bool[9];
 		freePosition = 8;
 		for (int i = 0; i < numOfPieces; i++) {
+			int[] color = Levels.level1[i];
 			Vector2 position = positions[i];
 			GameObject newPiece = Instantiate<GameObject>(piece, new Vector3(position.x, position.y, 0), Quaternion.identity);
+			newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
 			PieceBehaviour pieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
 			pieceBehaviour.position = i;
 			pieceBehaviour.puzzleController = this;
