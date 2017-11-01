@@ -7,7 +7,6 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	private readonly int numOfPieces = 8;
 	public GameObject piece;
 	public Vector2[] positions;
-	private bool[] occupiedState;
 	private int freePosition;
 	private int[][] nextPositions = new int[][] {
 		new int[2] {1, 3},
@@ -20,29 +19,62 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 		new int[3] {4, 6, 8},
 		new int[2] {5, 7}
 	};
+	private int[] initialPositions = new int[] {
+		0, 1, 2, 3, 4, 5, 6, 7, 8
+	};
 
 	void Start() {
-		occupiedState = new bool[9];
 		freePosition = 8;
+		Shuffle();
+		while (!IsSolvable()) {
+			Shuffle();
+		}
 		for (int i = 0; i < numOfPieces; i++) {
 			int[] color = Levels.level1[i];
-			Vector2 position = positions[i];
+			Vector2 position = positions[initialPositions[i]];
 			GameObject newPiece = Instantiate<GameObject>(piece, new Vector3(position.x, position.y, 0), Quaternion.identity);
 			newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
 			PieceBehaviour pieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
-			pieceBehaviour.position = i;
+			pieceBehaviour.position = initialPositions[i];
 			pieceBehaviour.puzzleController = this;
-			occupiedState[i] = true;
 		}
+		freePosition = initialPositions[numOfPieces];
 	}
 
-	public void Move(GameObject piece) {
+    public void Move(GameObject piece) {
 		int position = piece.GetComponent<PieceBehaviour>().position;
+
 		int[] possibleNextPositions = nextPositions[position];
 		if (Array.Exists(possibleNextPositions, element => element == freePosition)) {
 			piece.transform.position = positions[freePosition];
 			piece.GetComponent<PieceBehaviour>().position = freePosition;
 			freePosition = position;
 		}
+	}
+
+	private void Shuffle()
+    {
+		for (int i = 0; i < initialPositions.Length; i++) {
+			int randomPosition = UnityEngine.Random.Range(0, initialPositions.Length);
+			int aux = initialPositions[i];
+			initialPositions[i] = initialPositions[randomPosition];
+			initialPositions[randomPosition] = aux;
+		}
+    }
+
+	private bool IsSolvable() {
+		bool result = false;
+		int inversions = 0;
+		for (int i = 0; i < initialPositions.Length; i++) {
+			for (int j = i+1; j < initialPositions.Length; j++) {
+				if (initialPositions[i] > initialPositions[j]) {
+					inversions++;
+				}
+			}
+		}
+		if (inversions%2 == 0) {
+			result = true;
+		}
+		return result;
 	}
 }
