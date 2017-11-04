@@ -1,8 +1,7 @@
 public static class Levels {
-	public static readonly Level level1 = new Level(
-		new int[3] {57,21,97},
+	public static readonly Level blackAndWhite = new Level(
+		new int[3] {250,250,250},
 		new int[][] {
-			new int[3] {255, 255, 255},
 			new int[3] {222, 222, 222},
 			new int[3] {191, 191, 191},
 			new int[3] {158, 158, 158},
@@ -13,18 +12,69 @@ public static class Levels {
 			new int[3] {0, 0, 0}
 		}
 	);
-	public static readonly Level level2 = new Level(
-		new int[3] {255,255,255},
+	public static readonly Level allReds = new Level(
+		new int[3] {250,250,250},
 		new int[][] {
-			new int[3] {10, 24, 41},
-			new int[3] {6, 46, 67},
-			new int[3] {88, 142, 149},
-			new int[3] {94, 146, 149},
-			new int[3] {127, 173, 169},
-			new int[3] {171, 205, 203},
-			new int[3] {204, 217, 206},
-			new int[3] {231, 242, 230},
-			new int[3] {246, 237, 211}
+			new int[3] {255, 102, 102},
+			new int[3] {255, 77, 77},
+			new int[3] {255, 51, 51},
+			new int[3] {255, 26, 26},
+			new int[3] {255, 0, 0},
+			new int[3] {230, 0, 0},
+			new int[3] {204, 0, 0},
+			new int[3] {179, 0, 0}
+		}
+	);
+	public static readonly Level brownie = new Level(
+		new int[3] {250,250,250},
+		new int[][] {
+			new int[3] {163, 81, 0},
+			new int[3] {149, 74, 0},
+			new int[3] {135, 67, 0},
+			new int[3] {121, 60, 0},
+			new int[3] {107, 53, 0},
+			new int[3] {93, 47, 0},
+			new int[3] {79, 40, 0},
+			new int[3] {65, 33, 0}
+		}
+	);
+	public static readonly Level madmax = new Level(
+		new int[3] {250,250,250},
+		new int[][] {
+			new int[3] {236, 241, 201},
+			new int[3] {241, 199, 111},
+			new int[3] {241, 160, 111},
+			new int[3] {235, 125, 83},
+			new int[3] {216, 59, 17},
+			new int[3] {155, 25, 7},
+			new int[3] {113, 29, 17},
+			new int[3] {65, 13, 6}
+		}
+	);
+	public static readonly Level aqua = new Level(
+		new int[3] {250,250,250},
+		new int[][] {
+			new int[3] {163, 81, 0},
+			new int[3] {149, 74, 0},
+			new int[3] {135, 67, 0},
+			new int[3] {121, 60, 0},
+			new int[3] {107, 53, 0},
+			new int[3] {93, 47, 0},
+			new int[3] {79, 40, 0},
+			new int[3] {65, 33, 0}
+		}
+	);
+	public static readonly Level stupidPink = new Level(
+		new int[3] {250,250,250},
+		new int[][] {
+			new int[3] {163, 81, 0},
+			new int[3] {149, 74, 0},
+			new int[3] {135, 67, 0},
+			new int[3] {121, 60, 0},
+			new int[3] {107, 53, 0},
+			new int[3] {93, 47, 0},
+			new int[3] {79, 40, 0},
+			new int[3] {65, 33, 0}
 		}
 	);
 }

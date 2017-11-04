@@ -9,7 +9,9 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	public GameObject piece;
 	public Vector2[] positions;
 	private int freePosition;
-	private Level[] levels = new Level[2] {Levels.level1, Levels.level2};
+	private Level[] levels = new Level[] {
+		Levels.madmax,
+		Levels.allReds};
 	private int currentLevel = 0;
 	private int[][] nextPositions = new int[][] {
 		new int[2] {1, 3},
