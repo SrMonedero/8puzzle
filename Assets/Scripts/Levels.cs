@@ -67,14 +67,14 @@ public static class Levels {
 	public static readonly Level stupidPink = new Level(
 		new int[3] {250,250,250},
 		new int[][] {
-			new int[3] {163, 81, 0},
-			new int[3] {149, 74, 0},
-			new int[3] {135, 67, 0},
-			new int[3] {121, 60, 0},
-			new int[3] {107, 53, 0},
-			new int[3] {93, 47, 0},
-			new int[3] {79, 40, 0},
-			new int[3] {65, 33, 0}
+			new int[3] {255, 231, 241},
+			new int[3] {255, 163, 203},
+			new int[3] {255, 95, 164},
+			new int[3] {255, 3, 111},
+			new int[3] {241, 0, 103},
+			new int[3] {187, 1, 81},
+			new int[3] {147, 2, 64},
+			new int[3] {95, 0, 41}
 		}
 	);
 }

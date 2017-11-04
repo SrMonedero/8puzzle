@@ -11,7 +11,11 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	private int freePosition;
 	private Level[] levels = new Level[] {
 		Levels.aqua,
-		Levels.allReds};
+		Levels.madmax,
+		Levels.blackAndWhite,
+		Levels.stupidPink,
+		Levels.allReds,
+		Levels.brownie};
 	private int currentLevel = 0;
 	private int[][] nextPositions = new int[][] {
 		new int[2] {1, 3},
