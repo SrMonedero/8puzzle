@@ -10,7 +10,7 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	public Vector2[] positions;
 	private int freePosition;
 	private Level[] levels = new Level[] {
-		Levels.madmax,
+		Levels.aqua,
 		Levels.allReds};
 	private int currentLevel = 0;
 	private int[][] nextPositions = new int[][] {
