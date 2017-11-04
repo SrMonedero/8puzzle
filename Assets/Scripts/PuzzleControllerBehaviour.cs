@@ -31,12 +31,12 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 		while (!IsSolvable()) {
 			Shuffle();
 		}
-		foreach (int position in initialPositions) {
-			Debug.Log(position);
-		}
+		Level level = Levels.level1;
+		int[] backgroundColor = level.backgroundColor;
+		Camera.main.backgroundColor = new Color(backgroundColor[0]/255f, backgroundColor[1]/255f, backgroundColor[2]/255f);
 		for (int i = 0; i < initialPositions.Length; i++) {
 			if (initialPositions[i] != 8) {
-				int[] color = Levels.level1[initialPositions[i]];
+				int[] color = level.colors[initialPositions[i]];
 				Vector2 position = positions[i];
 				GameObject newPiece = Instantiate<GameObject>(piece, new Vector3(position.x, position.y, 0), Quaternion.identity);
 				newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
