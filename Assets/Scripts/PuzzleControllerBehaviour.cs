@@ -9,6 +9,8 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	public GameObject piece;
 	public Vector2[] positions;
 	private int freePosition;
+	private Level[] levels = new Level[2] {Levels.level1, Levels.level2};
+	private int currentLevel = 0;
 	private int[][] nextPositions = new int[][] {
 		new int[2] {1, 3},
 		new int[3] {0, 2, 4},
@@ -25,13 +27,17 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 	};
 
 	void Start() {
+		StartLevel();
+	}
+
+	private void StartLevel() {
 		puzzleState = PuzzleState.UNSOLVED;
 		freePosition = 8;
 		Shuffle();
 		while (!IsSolvable()) {
 			Shuffle();
 		}
-		Level level = Levels.level1;
+		Level level = levels[currentLevel];
 		int[] backgroundColor = level.backgroundColor;
 		Camera.main.backgroundColor = new Color(backgroundColor[0]/255f, backgroundColor[1]/255f, backgroundColor[2]/255f);
 		for (int i = 0; i < initialPositions.Length; i++) {
@@ -64,6 +70,21 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 				puzzleState = PuzzleState.SOLVED;
 			}
 		}
+	}
+
+	void Update() {
+		if (PuzzleState.SOLVED.Equals(puzzleState)) {
+			GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece");
+			foreach (GameObject piece in pieces) {
+				Destroy(piece);
+			}
+			currentLevel++;
+			if (currentLevel >= levels.Length) {
+				currentLevel = 0;
+			}
+			StartLevel();
+			puzzleState = PuzzleState.UNSOLVED;
+		}		
 	}
 
     private bool IsSolved() {
