@@ -31,17 +31,23 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
 		while (!IsSolvable()) {
 			Shuffle();
 		}
-		for (int i = 0; i < numOfPieces; i++) {
-			int[] color = Levels.level1[i];
-			Vector2 position = positions[initialPositions[i]];
-			GameObject newPiece = Instantiate<GameObject>(piece, new Vector3(position.x, position.y, 0), Quaternion.identity);
-			newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
-			PieceBehaviour pieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
-			pieceBehaviour.position = initialPositions[i];
-			pieceBehaviour.goodPosition = i;
-			pieceBehaviour.puzzleController = this;
+		foreach (int position in initialPositions) {
+			Debug.Log(position);
 		}
-		freePosition = initialPositions[numOfPieces];
+		for (int i = 0; i < initialPositions.Length; i++) {
+			if (initialPositions[i] != 8) {
+				int[] color = Levels.level1[initialPositions[i]];
+				Vector2 position = positions[i];
+				GameObject newPiece = Instantiate<GameObject>(piece, new Vector3(position.x, position.y, 0), Quaternion.identity);
+				newPiece.GetComponent<SpriteRenderer>().material.color = new Color(color[0]/255f, color[1]/255f, color[2]/255f);
+				PieceBehaviour pieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
+				pieceBehaviour.position = i;
+				pieceBehaviour.goodPosition = initialPositions[i];
+				pieceBehaviour.puzzleController = this;
+			} else {
+				freePosition = i;
+			}
+		}
 	}
 
     public void Move(GameObject piece) {
@@ -73,8 +79,7 @@ public class PuzzleControllerBehaviour : MonoBehaviour {
         return result;
     }
 
-    private void Shuffle()
-    {
+    private void Shuffle() {
 		for (int i = 0; i < initialPositions.Length; i++) {
 			int randomPosition = UnityEngine.Random.Range(0, initialPositions.Length);
 			int aux = initialPositions[i];
